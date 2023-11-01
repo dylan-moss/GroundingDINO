@@ -71,6 +71,7 @@ class GroundingDINO(nn.Module):
         dn_box_noise_scale=0.4,
         dn_label_noise_ratio=0.5,
         dn_labelbook_size=100,
+        text_tokenizer_type="bert-base-uncased",
         text_encoder_type="bert-base-uncased",
         sub_sentence_present=True,
         max_text_len=256,
@@ -104,7 +105,7 @@ class GroundingDINO(nn.Module):
         self.dn_labelbook_size = dn_labelbook_size
 
         # bert
-        self.tokenizer = get_tokenlizer.get_tokenlizer(text_encoder_type)
+        self.tokenizer = get_tokenlizer.get_tokenlizer(text_tokenizer_type)
         self.bert = get_tokenlizer.get_pretrained_language_model(text_encoder_type)
         self.bert.pooler.dense.weight.requires_grad_(False)
         self.bert.pooler.dense.bias.requires_grad_(False)
